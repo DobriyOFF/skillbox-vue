@@ -2,8 +2,10 @@
   <ul class="catalog__pagination pagination">
     <li class="pagination__item">
       <a
-        class="pagination__link pagination__link--arrow pagination__link--disabled"
+        class="pagination__link pagination__link--arrow"
+        :class="{'pagination__link--disabled': page === 1}"
         aria-label="Предыдущая страница"
+        @click.prevent="paginatePrev"
       >
         <svg width="8" height="14" fill="currentColor">
           <use xlink:href="#icon-arrow-left"></use>
@@ -14,7 +16,10 @@
       <a href="#" class="pagination__link" :class="{'pagination__link--current': pageNumber === page}" @click.prevent="paginate(pageNumber)"> {{ pageNumber }} </a>
     </li>
     <li class="pagination__item">
-      <a class="pagination__link pagination__link--arrow" href="#">
+      <a class="pagination__link pagination__link--arrow"
+         href="#"
+         :class="{'pagination__link--disabled': page === pages}"
+         @click.prevent="paginateNext">
         <svg width="8" height="14" fill="currentColor">
           <use xlink:href="#icon-arrow-right"></use>
         </svg>
@@ -25,21 +30,31 @@
 
 <script>
 export default {
-  model: {
-    prop: 'page',
-    event: 'paginate',
-  },
-  props: ['page', 'count', 'perPage'],
+  props: ['modelValue', 'count', 'perPage'],
   computed: {
+    page() {
+      return this.modelValue;
+    },
     pages() {
       return Math.ceil(this.count / this.perPage);
+    },
+    paginateNext() {
+      let pageNumber = this.page + 1;
+      if (this.page != this.pages) {
+        this.paginate(pageNumber);
+      }
+    },
+    paginatePrev() {
+      let pageNumber = this.page - 1;
+      if (this.page != 1) {
+        this.paginate(pageNumber);
+      }
     },
   },
   methods: {
     paginate(page) {
-      this.$emit('paginate', page);
-      console.log(page)
-    }
+      this.$emit('update:modelValue', page);
+    },
   }
 };
 </script>
