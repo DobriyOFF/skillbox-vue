@@ -12,7 +12,6 @@
       </h3>
 
       <span class="catalog__price"> {{ product.price }} ₽ </span>
-
       <ul class="colors colors--black">
         <li class="colors__item">
           <label class="colors__label">
@@ -46,5 +45,5 @@
 <script>
 export default {
   props: ['products'],
-}
+};
 </script>
