@@ -39,6 +39,11 @@ export default {
     pages() {
       return Math.ceil(this.count / this.perPage);
     },
+  },
+  methods: {
+    paginate(page) {
+      this.$emit('paginate', page);
+    },
     paginateNext() {
       let pageNumber = Number(this.page) + 1;
       if (this.page != this.pages) {
@@ -50,11 +55,6 @@ export default {
       if (this.page != 1) {
         this.paginate(pageNumber);
       }
-    },
-  },
-  methods: {
-    paginate(page) {
-      this.$emit('paginate', page);
     },
   }
 };

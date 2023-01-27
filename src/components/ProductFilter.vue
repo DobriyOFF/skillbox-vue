@@ -218,13 +218,13 @@ export default {
     submit() {
       this.$emit("update:priceFrom", this.currentPriceFrom);
       this.$emit("update:priceTo", this.currentPriceTo);
-      this.$emit("update:CategoryId", this.currentCategoryId);
+      this.$emit("update:categoryId", this.currentCategoryId);
       this.$emit("update:color", this.currentColor);
     },
     reset() {
       this.$emit("update:priceFrom", 0);
       this.$emit("update:priceTo", 0);
-      this.$emit("update:CategoryId", 0);
+      this.$emit("update:categoryId", 0);
       this.$emit("update:color", 0);
     },
   },
